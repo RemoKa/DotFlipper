@@ -19,11 +19,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "spi.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "TLE94112ES.h"
 
 /* USER CODE END Includes */
 
@@ -34,6 +36,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define DAISY_CHAIN	1
+#define NO_OF_CHIPS	3
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -66,6 +71,10 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
+	uint8_t TXBuf[NO_OF_CHIPS * 2];
+	uint8_t RXBuf[NO_OF_CHIPS * 2];
+	Message Messages[NO_OF_CHIPS];
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -87,7 +96,23 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
+
+  Messages[0].RegisterAdress 	= HB_ACT_1_CTRL;
+  Messages[0].Data 				= HB1_HS_EN;
+  Messages[0].WriteClear 		= WRITE;
+
+  Messages[1].RegisterAdress 	= HB_ACT_2_CTRL;
+  Messages[1].Data 				= HB1_LS_EN;
+  Messages[1].WriteClear 		= WRITE;
+
+  Messages[2].RegisterAdress 	= HB_ACT_3_CTRL;
+  Messages[2].Data 				= HB3_HS_EN;
+  Messages[2].WriteClear 		= WRITE;
+
+  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
 
   /* USER CODE END 2 */
 
