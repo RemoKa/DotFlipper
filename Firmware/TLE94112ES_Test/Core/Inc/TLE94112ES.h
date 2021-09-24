@@ -243,6 +243,8 @@ typedef struct Message
 	uint8_t	WriteClear;
 }Message;
 
+void TLE94112ES_Init();
+
 void TLE94112ES_ConstructTXBuffer(uint8_t *TXBuf, int length, Message *Messages);
 
 #ifdef __cplusplus

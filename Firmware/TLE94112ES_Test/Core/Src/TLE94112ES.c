@@ -12,13 +12,14 @@ void TLE94112ES_ConstructTXBuffer(uint8_t *TXBuf, int NumberOfChips, Message *Me
 
 	//Daisy Chain
 	for(int i = 0; i < NumberOfChips; i++){
-		TXBuf[i] 					= Messages[i].RegisterAdress | (Messages[i].WriteClear << 7);
+		TXBuf[i] 					= (Messages[i].RegisterAdress | (Messages[i].WriteClear << 7)) & 0b11111101;
 		TXBuf[i + NumberOfChips] 	= Messages[i].Data;
 	}
 
 	//set Last Address Byte Token LABT
-	TXBuf[NumberOfChips - 1] &= 0b11111101;
+	TXBuf[NumberOfChips - 1] |= 0b00000010;
 }
+
 
 
 

@@ -37,7 +37,8 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define DAISY_CHAIN	1
-#define NO_OF_CHIPS	3
+#define NO_OF_CHIPS	1
+#define PULSELENGTH 10
 
 /* USER CODE END PD */
 
@@ -49,6 +50,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+	int pause = 100 - PULSELENGTH;
+	uint8_t TXBuf[NO_OF_CHIPS * 2];
+	uint8_t RXBuf[NO_OF_CHIPS * 2];
+	Message Messages[NO_OF_CHIPS];
 
 /* USER CODE END PV */
 
@@ -70,10 +75,9 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
 
-	uint8_t TXBuf[NO_OF_CHIPS * 2];
-	uint8_t RXBuf[NO_OF_CHIPS * 2];
-	Message Messages[NO_OF_CHIPS];
+
 
   /* USER CODE END 1 */
 
@@ -99,20 +103,16 @@ int main(void)
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
 
-  Messages[0].RegisterAdress 	= HB_ACT_1_CTRL;
-  Messages[0].Data 				= HB1_HS_EN;
-  Messages[0].WriteClear 		= WRITE;
 
-  Messages[1].RegisterAdress 	= HB_ACT_2_CTRL;
-  Messages[1].Data 				= HB1_LS_EN;
-  Messages[1].WriteClear 		= WRITE;
 
-  Messages[2].RegisterAdress 	= HB_ACT_3_CTRL;
-  Messages[2].Data 				= HB3_HS_EN;
-  Messages[2].WriteClear 		= WRITE;
+//  Messages[1].RegisterAdress 	= HB_ACT_2_CTRL;
+//  Messages[1].Data 				= HB1_LS_EN;
+//  Messages[1].WriteClear 		= WRITE;
+//
+//  Messages[2].RegisterAdress 	= HB_ACT_3_CTRL;
+//  Messages[2].Data 				= HB3_HS_EN;
+//  Messages[2].WriteClear 		= WRITE;
 
-  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
-  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
 
   /* USER CODE END 2 */
 
@@ -120,6 +120,53 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+	  Messages[0].Data 				= HB10_HS_EN | HB11_LS_EN;
+	  Messages[0].WriteClear 		= WRITE;
+
+	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+
+	  HAL_Delay(PULSELENGTH);
+
+	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+	  Messages[0].Data 				= 0x00;
+	  Messages[0].WriteClear 		= WRITE;
+
+	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+
+	  HAL_Delay(pause);
+
+	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+	  Messages[0].Data 				= HB10_LS_EN | HB12_HS_EN;
+	  Messages[0].WriteClear 		= WRITE;
+
+	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+
+	  HAL_Delay(PULSELENGTH);
+
+	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+	  Messages[0].Data 				= 0x00;
+	  Messages[0].WriteClear 		= WRITE;
+
+	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+
+	  HAL_Delay(pause);
+
+
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
