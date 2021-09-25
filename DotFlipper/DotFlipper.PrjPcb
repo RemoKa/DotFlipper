@@ -58,23 +58,6 @@ GenerateClassCluster=0
 DocumentUniqueId=HPCXWLEA
 
 [Document2]
-DocumentPath=DotFlipper.PcbDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=GJTDWKNU
-
-[Document3]
 DocumentPath=DotFlipper.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -91,8 +74,25 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=EONNSRMC
 
-[Document4]
+[Document3]
 DocumentPath=STM32 uC.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=2
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=FNDBCCHN
+
+[Document4]
+DocumentPath=PCB\DotFlipper.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -106,7 +106,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=FNDBCCHN
+DocumentUniqueId=AGCEHAKO
 
 [Configuration1]
 Name=Sources
