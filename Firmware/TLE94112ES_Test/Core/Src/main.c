@@ -55,6 +55,7 @@
 	uint8_t RXBuf[NO_OF_CHIPS * 2];
 	Message Messages[NO_OF_CHIPS];
 
+	int8_t controllerData = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -76,7 +77,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 	HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
-
+	HAL_GPIO_WritePin(LATCH_GPIO_Port, LATCH_Pin, 0);
 
 
   /* USER CODE END 1 */
@@ -101,6 +102,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_SPI2_Init();
+  MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
 
 
@@ -120,49 +122,61 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
-	  Messages[0].Data 				= HB10_HS_EN | HB11_LS_EN;
-	  Messages[0].WriteClear 		= WRITE;
 
-	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
-	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
-	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
-	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+		HAL_GPIO_WritePin(LATCH_GPIO_Port, LATCH_Pin, 0);
+		HAL_Delay(0);
+		HAL_GPIO_WritePin(LATCH_GPIO_Port, LATCH_Pin, 1);
+		HAL_Delay(0);
+		HAL_GPIO_WritePin(LATCH_GPIO_Port, LATCH_Pin, 0);
 
-	  HAL_Delay(PULSELENGTH);
 
-	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
-	  Messages[0].Data 				= 0x00;
-	  Messages[0].WriteClear 		= WRITE;
-
-	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
-	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
-	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
-	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
-
-	  HAL_Delay(pause);
-
-	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
-	  Messages[0].Data 				= HB10_LS_EN | HB12_HS_EN;
-	  Messages[0].WriteClear 		= WRITE;
-
-	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
-	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
-	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
-	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
-
-	  HAL_Delay(PULSELENGTH);
-
-	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
-	  Messages[0].Data 				= 0x00;
-	  Messages[0].WriteClear 		= WRITE;
-
-	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
-	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
-	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
-	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
-
-	  HAL_Delay(pause);
+		HAL_SPI_Receive(&hspi1, &controllerData, 1, HAL_MAX_DELAY);
+		HAL_Delay(0);
+//
+//
+//	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+//	  Messages[0].Data 				= HB10_HS_EN | HB11_LS_EN;
+//	  Messages[0].WriteClear 		= WRITE;
+//
+//	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+//	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+//	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+//	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+//
+//	  HAL_Delay(PULSELENGTH);
+//
+//	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+//	  Messages[0].Data 				= 0x00;
+//	  Messages[0].WriteClear 		= WRITE;
+//
+//	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+//	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+//	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+//	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+//
+//	  HAL_Delay(pause);
+//
+//	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+//	  Messages[0].Data 				= HB10_LS_EN | HB12_HS_EN;
+//	  Messages[0].WriteClear 		= WRITE;
+//
+//	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+//	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+//	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+//	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+//
+//	  HAL_Delay(PULSELENGTH);
+//
+//	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+//	  Messages[0].Data 				= 0x00;
+//	  Messages[0].WriteClear 		= WRITE;
+//
+//	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+//	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+//	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+//	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+//
+//	  HAL_Delay(pause);
 
 
 
