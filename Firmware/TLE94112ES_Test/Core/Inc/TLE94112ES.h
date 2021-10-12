@@ -229,9 +229,9 @@ typedef enum StatusData
 
 typedef enum ReadWriteClear
 {
-	READ 				= 0,
-	WRITE 				= 1,
-	CLEAR				= 1,
+	READ 				= 0b00000000,
+	WRITE 				= 0b10000000,
+	CLEAR				= 0b10000000,
 }ReadWriteClear;
 
 
