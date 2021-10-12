@@ -2,7 +2,7 @@
  * TLE94112ES.c
  *
  *  Created on: 21.09.2021
- *      Author: Remo
+ *      Author: Remo Kagerer
  */
 
 #include "TLE94112ES.h"

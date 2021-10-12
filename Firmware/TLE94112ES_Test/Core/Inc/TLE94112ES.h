@@ -2,7 +2,7 @@
  * TLE94112ES.h
  *
  *  Created on: 21.09.2021
- *      Author: Remo
+ *      Author: Remo Kagerer
  */
 
 #ifndef INC_TLE94112ES_H_
