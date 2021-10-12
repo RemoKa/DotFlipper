@@ -240,11 +240,13 @@ typedef struct Message
 	RegisterAdresses 	RegisterAdress;
 	ControlData 		Data;
 	ReadWriteClear		WriteClear;
+	StatusData			Response;
+	StatusData			GlobalStatus;
 }Message;
 
-void TLE94112ES_Init();
-
 void TLE94112ES_ConstructTXBuffer(uint8_t *TXBuf, int length, Message *Messages);
+
+void TLE94112ES_DeconstructRXBuffer(uint8_t *RXBuf, int NumberOfChips, Message *Messages);
 
 #ifdef __cplusplus
 }
