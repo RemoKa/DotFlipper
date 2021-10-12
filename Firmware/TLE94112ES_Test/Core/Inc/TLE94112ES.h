@@ -13,7 +13,6 @@ extern "C" {
 #endif
 
 #include "main.h"
-#include "stdbool.h"
 
 typedef enum RegisterAdresses
 {
