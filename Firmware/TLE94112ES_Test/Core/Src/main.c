@@ -142,6 +142,7 @@ int main(void)
 	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
 	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
 	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
 
 	  HAL_Delay(PULSELENGTH);
 
@@ -153,6 +154,7 @@ int main(void)
 	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
 	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
 	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
 
 	  HAL_Delay(pause);
 
@@ -164,6 +166,7 @@ int main(void)
 	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
 	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
 	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
 
 	  HAL_Delay(PULSELENGTH);
 
@@ -175,6 +178,7 @@ int main(void)
 	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
 	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
 	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
 
 	  HAL_Delay(pause);
 
