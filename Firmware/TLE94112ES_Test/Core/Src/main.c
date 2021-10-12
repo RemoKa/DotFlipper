@@ -36,7 +36,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DAISY_CHAIN	1
 #define NO_OF_CHIPS	1
 #define PULSELENGTH 10
 
@@ -105,17 +104,6 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
 
-
-
-//  Messages[1].RegisterAdress 	= HB_ACT_2_CTRL;
-//  Messages[1].Data 				= HB1_LS_EN;
-//  Messages[1].WriteClear 		= WRITE;
-//
-//  Messages[2].RegisterAdress 	= HB_ACT_3_CTRL;
-//  Messages[2].Data 				= HB3_HS_EN;
-//  Messages[2].WriteClear 		= WRITE;
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -132,8 +120,7 @@ int main(void)
 //
 //		HAL_SPI_Receive(&hspi1, &controllerData, 1, HAL_MAX_DELAY);
 //		HAL_Delay(0);
-//
-//
+
 	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
 	  Messages[0].Data 				= HB10_HS_EN | HB11_LS_EN;
 	  Messages[0].WriteClear 		= WRITE;
@@ -181,9 +168,6 @@ int main(void)
 	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
 
 	  HAL_Delay(pause);
-
-
-
 
     /* USER CODE END WHILE */
 
