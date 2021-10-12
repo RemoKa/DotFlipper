@@ -54,7 +54,7 @@
 	uint8_t RXBuf[NO_OF_CHIPS * 2];
 	Message Messages[NO_OF_CHIPS];
 
-	int8_t controllerData = 0;
+	uint8_t controllerData = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -118,7 +118,7 @@ int main(void)
 //		HAL_GPIO_WritePin(LATCH_GPIO_Port, LATCH_Pin, 0);
 //
 //
-//		HAL_SPI_Receive(&hspi1, &controllerData, 1, HAL_MAX_DELAY);
+		HAL_SPI_Receive(&hspi1, &controllerData, 1, HAL_MAX_DELAY);
 //		HAL_Delay(0);
 
 	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
