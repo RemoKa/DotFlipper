@@ -237,9 +237,9 @@ typedef enum ReadWriteClear
 
 typedef struct Message
 {
-	uint8_t RegisterAdress;
-	uint8_t Data;
-	uint8_t	WriteClear;
+	RegisterAdresses 	RegisterAdress;
+	ControlData 		Data;
+	ReadWriteClear		WriteClear;
 }Message;
 
 void TLE94112ES_Init();
