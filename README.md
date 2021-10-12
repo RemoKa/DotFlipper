@@ -6,3 +6,38 @@ Driver Board for Flip Dot Matrices using the brand new Infineon TLE94112ES, 12 C
 This basic Library contains a Header File, which defines all the necessary register adresses and Bitmasks, as well as a Message struct,
 consiting of a register adress, the data and a read/write/clear bit.
 The .c File contains the function `TLE94112ES_ConstructTXBuffer`, which accepts an array of Messages to construct the correct byte order in the TXbuffer for daisy chain operation of arbitrary length 
+
+
+
+```
+ 
+                                         ┌────────────┐                    ┌───────────┐
+                                         │            │                    │           │
+                                         │    NES     │ SPI Unidirectional │           │
+                                         │  Gamepad   ├──────────────────► │           │
+                                         │            │                    │           │
+                                         └────────────┘                    │           │
+                                                                           │           │
+                                                                           │           │
+                         ┌─────┐    ┌─────┐    ┌─────┐                     │           │ 
+                         │ TLE │    │ TLE │    │ TLE │  SPI Bidirectional  │           │
+                         │     │◄───┤     │◄───┤     │◄────────────────────┤   STM32   │
+                         │ C2  │    │ C1  │    │ C0  │    Daisy Chain      │           │
+                         └──┬──┘    └─────┘    └─────┘                     │           │
+                            │                                              │           │
+                            ▼          ┌──────────────────────────────────►│           │
+                         ┌─────┐       │                                   │           │
+                         │ TLE │       │                                   └───────────┘
+                         │     │       │
+                         │ R0  │       │
+                         └──┬──┘       │
+                            │          │
+                            │          │
+                            ▼          │
+                         ┌─────┐       │
+                         │ TLE │       │
+                         │     ├───────┘
+                         │ R0  │
+                         └─────┘
+
+```
