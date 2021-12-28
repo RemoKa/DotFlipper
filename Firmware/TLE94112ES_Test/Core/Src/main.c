@@ -49,7 +49,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-	int pause = 100 - PULSELENGTH;
+	int pause = 1000 - PULSELENGTH;
 	uint8_t TXBuf[NO_OF_CHIPS * 2];
 	uint8_t RXBuf[NO_OF_CHIPS * 2];
 	Message Messages[NO_OF_CHIPS];
@@ -75,6 +75,7 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	HAL_GPIO_WritePin(SPI2_EN_GPIO_Port, SPI2_EN_Pin, 1);
 	HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
 	HAL_GPIO_WritePin(LATCH_GPIO_Port, LATCH_Pin, 0);
 
@@ -257,4 +258,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -68,6 +68,8 @@ void Error_Handler(void);
 #define LATCH_GPIO_Port GPIOA
 #define SPI2_CS_Pin GPIO_PIN_1
 #define SPI2_CS_GPIO_Port GPIOB
+#define SPI2_EN_Pin GPIO_PIN_6
+#define SPI2_EN_GPIO_Port GPIOC
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
@@ -83,5 +85,3 @@ void Error_Handler(void);
 #endif
 
 #endif /* __MAIN_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
