@@ -18,11 +18,12 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "spi.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "TLE94112ES.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -32,6 +33,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define NO_OF_CHIPS	1
+#define PULSELENGTH 1000
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -42,6 +45,12 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+int pause = 2000 - PULSELENGTH;
+	uint8_t TXBuf[NO_OF_CHIPS * 2];
+	uint8_t RXBuf[NO_OF_CHIPS * 2];
+	Message Messages[NO_OF_CHIPS];
+
+	uint8_t controllerData = 0;
 
 /* USER CODE END PV */
 
@@ -84,14 +93,62 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_GPIO_WritePin(HB_EN_GPIO_Port, HB_EN_Pin, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+	  	  Messages[0].Data 				= HB10_HS_EN | HB11_LS_EN;
+	  	  Messages[0].WriteClear 		= WRITE;
+
+	  	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+	  	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+	  	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+	  	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
+
+	  	  HAL_Delay(PULSELENGTH);
+
+	  	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+	  	  Messages[0].Data 				= 0x00;
+	  	  Messages[0].WriteClear 		= WRITE;
+
+	  	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+	  	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+	  	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+	  	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
+
+	  	  HAL_Delay(pause);
+
+	  	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+	  	  Messages[0].Data 				= HB10_LS_EN | HB12_HS_EN;
+	  	  Messages[0].WriteClear 		= WRITE;
+
+	  	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+	  	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+	  	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+	  	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
+
+	  	  HAL_Delay(PULSELENGTH);
+
+	  	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
+	  	  Messages[0].Data 				= 0x00;
+	  	  Messages[0].WriteClear 		= WRITE;
+
+	  	  TLE94112ES_ConstructTXBuffer(TXBuf, NO_OF_CHIPS, Messages);
+	  	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+	  	  HAL_SPI_TransmitReceive(&hspi2, TXBuf, RXBuf, NO_OF_CHIPS * 2, HAL_MAX_DELAY);
+	  	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
+
+	  	  HAL_Delay(pause);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -116,7 +173,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL4;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
   RCC_OscInitStruct.PLL.PREDIV = RCC_PREDIV_DIV1;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -127,7 +184,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
