@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "TLE94112ES.h"
+#include "DISPLAY.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

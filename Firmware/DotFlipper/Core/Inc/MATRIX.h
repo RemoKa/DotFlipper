@@ -12,6 +12,17 @@
 extern "C" {
 #endif
 
+#include "TLE94112ES.h"
+
+typedef struct Matrix{
+	uint8_t 	width;
+	uint8_t 	height;
+	uint8_t		DaisyChainLength;
+	Message		*Messages;
+}Matrix;
+
+Matrix Diplay_init(uint8_t width, uint8_t height);
+
 #ifdef __cplusplus
 }
 #endif
