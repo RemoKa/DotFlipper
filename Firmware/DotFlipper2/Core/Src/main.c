@@ -91,7 +91,7 @@ int main(void)
 	display.Matrix->width = WIDTH;
 	display.Matrix->height = HEIGHT;
 	display.Matrix->DaisyChainLength = DAISYCHAINLENGHT;
-	display.Matrix->Messages = messages;
+	display.Matrix->MessageBuffer = messages;
 
 
   /* USER CODE END 1 */

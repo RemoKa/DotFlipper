@@ -18,7 +18,7 @@ typedef struct Matrix{
 	uint8_t 	width;
 	uint8_t 	height;
 	uint8_t		DaisyChainLength;
-	Message		*Messages;
+	Message		*MessageBuffer;
 }Matrix;
 
 Matrix Diplay_init(uint8_t width, uint8_t height);
