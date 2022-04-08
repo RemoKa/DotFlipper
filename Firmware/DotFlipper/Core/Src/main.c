@@ -36,6 +36,8 @@
 /* USER CODE BEGIN PD */
 #define NO_OF_CHIPS	1
 #define PULSELENGTH 1000
+#define BUFFERLENGHT 12
+#define DAISYCHAINLENGHT 5
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -47,11 +49,20 @@
 
 /* USER CODE BEGIN PV */
 int pause = 2000 - PULSELENGTH;
-	uint8_t TXBuf[NO_OF_CHIPS * 2];
-	uint8_t RXBuf[NO_OF_CHIPS * 2];
-	Message Messages[NO_OF_CHIPS];
+	//uint8_t TXBuf[NO_OF_CHIPS * 2];
+	//uint8_t RXBuf[NO_OF_CHIPS * 2];
+	//Message Messages[NO_OF_CHIPS];
 
-	uint8_t controllerData = 0;
+	//uint8_t controllerData = 0;
+
+
+///////////////////////////////////
+	Display 	display;
+	Matrix 		matrix;
+	uint32_t 	framebuf1[BUFFERLENGHT];
+	uint32_t 	framebuf2[BUFFERLENGHT];
+	uint32_t 	difbuf[BUFFERLENGHT];
+	Message		messages[DAISYCHAINLENGHT];
 
 /* USER CODE END PV */
 
@@ -97,12 +108,26 @@ int main(void)
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(HB_EN_GPIO_Port, HB_EN_Pin, 1);
+
+  matrix.width = 3;
+  matrix.height = 2;
+  matrix.DaisyChainLength = DAISYCHAINLENGHT;
+  matrix.Messages = messages;
+
+  display.width = 30;
+  display.height = 12;
+  display.Frontbuffer = framebuf1;
+  display.Backbuffer = framebuf2;
+  display.Differencebuffer = difbuf;
+  display.Matrix = matrix;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  /*
 	  	  Messages[0].RegisterAdress 	= HB_ACT_3_CTRL;
 	  	  Messages[0].Data 				= HB10_HS_EN | HB11_LS_EN;
 	  	  Messages[0].WriteClear 		= WRITE;
@@ -150,6 +175,7 @@ int main(void)
 	  	  TLE94112ES_DeconstructRXBuffer(RXBuf, NO_OF_CHIPS, Messages);
 
 	  	  HAL_Delay(pause);
+	  	  */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
