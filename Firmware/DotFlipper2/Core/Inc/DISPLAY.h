@@ -18,13 +18,13 @@ typedef struct Display{
 	uint16_t 	width;
 	uint16_t 	height;
 	Matrix		*Matrix;
-	uint32_t		*Frontbuffer;
-	uint32_t		*Backbuffer;
-	uint32_t		*Differencebuffer;
+	uint32_t	*Frontbuffer;
+	uint32_t	*Backbuffer;
+	uint32_t	*Differencebuffer;
 }Display;
 
 
-void Display_setPixel(Display *Display, uint16_t x, uint16_t y, uint8_t color){
+void Display_setPixel(Display *Display, uint16_t x, uint16_t y, uint8_t color);
 
 void Display_swap();
 

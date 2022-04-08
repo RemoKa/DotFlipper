@@ -21,6 +21,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "TLE94112ES.h"
+#include "MATRIX.h"
+#include "DISPLAY.h"
+//#include "DISPLAY.h"
 
 /* USER CODE END Includes */
 
@@ -42,6 +46,8 @@
  SPI_HandleTypeDef hspi2;
 
 /* USER CODE BEGIN PV */
+
+
 
 /* USER CODE END PV */
 
