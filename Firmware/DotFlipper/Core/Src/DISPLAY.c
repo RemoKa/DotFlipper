@@ -19,6 +19,8 @@ void Display_setPixel(Display *Display, uint16_t x, uint16_t y, uint8_t color){
 
 void Display_swap();
 
-void Display_draw();
+void Display_draw(){
+
+};
 
 
