@@ -35,6 +35,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define BUFFERLENGHT 12
+#define DAISYCHAINLENGHT 5
+#define WIDTH 30
+#define HEIGHT 12
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -47,7 +51,12 @@
 
 /* USER CODE BEGIN PV */
 
-
+Display display;
+Matrix 		matrix;
+uint32_t 	framebuf1[BUFFERLENGHT];
+uint32_t 	framebuf2[BUFFERLENGHT];
+uint32_t 	difbuf[BUFFERLENGHT];
+Message		messages[DAISYCHAINLENGHT];
 
 /* USER CODE END PV */
 
@@ -71,6 +80,19 @@ static void MX_SPI2_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
+	display.width = WIDTH;
+	display.height = HEIGHT;
+	display.Matrix = &matrix;
+	display.Frontbuffer = framebuf1;
+	display.Backbuffer = framebuf2;
+	display.Differencebuffer = difbuf;
+
+	display.Matrix->width = WIDTH;
+	display.Matrix->height = HEIGHT;
+	display.Matrix->DaisyChainLength = DAISYCHAINLENGHT;
+	display.Matrix->Messages = messages;
+
 
   /* USER CODE END 1 */
 
