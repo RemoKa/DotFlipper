@@ -7,7 +7,13 @@
 
 #include "DISPLAY.h"
 
-void Display_setPixel(Display *display, uint16_t x, uint16_t y, uint8_t color);
+void Display_setPixel(Display *display, uint16_t x, uint16_t y, uint8_t color){
+	if(color == 0){
+		display->Backbuffer[y] &= !(1 << y);
+	}else{
+		Display->Backbuffer[y] |= (1 << x);
+	}
+}
 
 void Display_swap(Display *display){
 	uint32_t* temp = display->Frontbuffer;
