@@ -21,6 +21,8 @@ typedef struct Matrix{
 	Message		*MessageBuffer;
 }Matrix;
 
+void Matrix_sendMessages(Matrix* matrix);
+
 #ifdef __cplusplus
 }
 #endif

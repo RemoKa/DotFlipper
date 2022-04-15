@@ -21,5 +21,16 @@ void Display_swap(Display *display){
 	display->Backbuffer = temp;
 }
 
-void Display_draw();
+void Display_draw(Display *display){
+	Display_swap(display);
+	Matrix *matrix = display->Matrix;
+	uint32t *frontBuffer = display->Frontbuffer;
+
+	//iterate over the buffer
+
+		//convert frontbuffer to messages in Matrix of buffer
+
+		Matrix_sendMessages(matrix);
+
+}
 
