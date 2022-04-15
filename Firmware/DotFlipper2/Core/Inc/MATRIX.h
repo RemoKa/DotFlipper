@@ -21,6 +21,17 @@ typedef struct Matrix{
 	Message		*MessageBuffer;
 }Matrix;
 
+typedef struct PixelInfo{
+	int x;
+	int y;
+	int chainNumber;
+	int hbControlRegisterIndex; //1-3
+	int hbControlDataIndex; //1-12
+
+}PixelInfo;
+
+//map coordinates to PixelInfos
+
 void Matrix_sendMessages(Matrix* matrix);
 
 #ifdef __cplusplus
