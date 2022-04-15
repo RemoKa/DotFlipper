@@ -21,8 +21,6 @@ typedef struct Matrix{
 	Message		*MessageBuffer;
 }Matrix;
 
-Matrix Diplay_init(uint8_t width, uint8_t height);
-
 #ifdef __cplusplus
 }
 #endif
