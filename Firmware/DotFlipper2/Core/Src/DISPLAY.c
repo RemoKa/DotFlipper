@@ -11,7 +11,7 @@ void Display_setPixel(Display *display, uint16_t x, uint16_t y, uint8_t color){
 	if(color == 0){
 		display->Backbuffer[y] &= !(1 << y);
 	}else{
-		Display->Backbuffer[y] |= (1 << x);
+		display->Backbuffer[y] |= (1 << x);
 	}
 }
 
