@@ -24,7 +24,7 @@ void Display_swap(Display *display){
 void Display_draw(Display *display){
 	Display_swap(display);
 	Matrix *matrix = display->Matrix;
-	uint32t *frontBuffer = display->Frontbuffer;
+	uint32_t *frontBuffer = display->Frontbuffer;
 
 	//iterate over the buffer
 
