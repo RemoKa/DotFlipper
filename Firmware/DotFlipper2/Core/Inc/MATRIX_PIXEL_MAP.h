@@ -12,6 +12,12 @@
 extern "C" {
 #endif
 
+#include "MATRIX.h"
+
+static const Pixel PixelMap[30][12] = {
+		{{{0,0,0},{0,0,0}}}
+};
+
 
 #ifdef __cplusplus
 }
