@@ -21,14 +21,19 @@ typedef struct Matrix{
 	Message		*MessageBuffer;
 }Matrix;
 
-typedef struct PixelInfo{
-	int x;
-	int y;
-	int chainNumber;
+typedef struct Pin{
+	int chainIndex;
 	int hbControlRegisterIndex; //1-3
 	int hbControlDataIndex; //1-12
+}Pin;
 
-}PixelInfo;
+typedef struct Pixel{
+	Pin rowHigh;
+	Pin rowLow;
+	Pin column;
+}Pixel;
+
+
 
 //map coordinates to PixelInfos
 
