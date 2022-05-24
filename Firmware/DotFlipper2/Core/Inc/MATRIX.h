@@ -14,6 +14,7 @@ extern "C" {
 
 #include "TLE94112ES.h"
 
+
 typedef struct Matrix{
 	uint8_t 	width;
 	uint8_t 	height;
@@ -22,9 +23,9 @@ typedef struct Matrix{
 }Matrix;
 
 typedef struct Pin{
-	int chainIndex;
-	int hbControlRegisterIndex; //1-3
-	int hbControlDataIndex; //1-12
+	uint8_t chainIndex: 3;
+	uint8_t hbControlRegisterIndex; //1-3
+	uint8_t hbControlDataIndex; //1-12
 }Pin;
 
 typedef struct Pixel{
