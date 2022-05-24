@@ -26,6 +26,7 @@
 #include "TLE94112ES.h"
 #include "MATRIX.h"
 #include "DISPLAY.h"
+#include "MATRIX_PIXEL_MAP.h"
 //#include "DISPLAY.h"
 
 /* USER CODE END Includes */
@@ -115,7 +116,7 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
-
+  	  volatile int v = PixelMap[4][8].rowHigh.chainIndex;
   /* USER CODE END 2 */
 
   /* Infinite loop */
