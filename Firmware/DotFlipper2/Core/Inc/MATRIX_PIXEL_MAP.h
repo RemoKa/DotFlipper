@@ -14,8 +14,6 @@ extern "C" {
 
 #include "MATRIX.h"
 
-// { {{Pin rowHigh},{Pin rowLow},{Pin column} }},
-
 static const volatile Row RowMap[12] = {
 		{{R1,1 },{R1,5 }},	//0
 		{{R1,7 },{R1,9 }},	//1
@@ -65,9 +63,6 @@ static const volatile Column ColumnMap[30] = {
 		{{C2,1}},		//28
 		{{C2,2}}		//29
 };
-
-
-
 
 #ifdef __cplusplus
 }
