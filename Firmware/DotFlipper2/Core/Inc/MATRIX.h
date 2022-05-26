@@ -55,6 +55,15 @@ typedef struct Pixel{
 	Pin column;
 }Pixel;
 
+typedef struct Row{
+	Pin high;
+	Pin low;
+}Row;
+
+typedef struct Column{
+	Pin pin;
+}Column;
+
 
 
 

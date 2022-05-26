@@ -17,8 +17,27 @@ extern "C" {
 
 // { {{Pin rowHigh},{Pin rowLow},{Pin column} }},
 
+
+static const volatile Row RowMap[12] = {
+		{{4,1},{4,5}},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+};
+static const volatile Column ColumnMap[30] = {
+		{{0,4}}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},  {}, {}, {}, {}, {}, {},  {}, {}, {}, {}, {}, {},  {}, {}, {}, {}, {}, {},
+};
+
 static const volatile Pixel PixelMap[30][12] = {
-		{ {{DC4, HB1},{DC4, HB5},{DC0, HB4} }},
+		{ {{4,1},{4,5},{0,4}} , {{0,0},{0,0},{0,0}} , },
 		{  },
 		{  },
 		{  },
