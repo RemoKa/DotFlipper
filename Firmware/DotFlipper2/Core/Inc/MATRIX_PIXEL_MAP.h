@@ -18,7 +18,7 @@ extern "C" {
 // { {{Pin rowHigh},{Pin rowLow},{Pin column} }},
 
 static const volatile Pixel PixelMap[30][12] = {
-		{ {{4, HB_ACT_1_CTRL, HB1_HS_EN},{4, HB_ACT_2_CTRL, HB5_LS_EN},{0, HB_ACT_1_CTRL, HB4_LS_EN} }},
+		{ {{4, 1},{4, 5},{0, 4} }},
 		{  },
 		{  },
 		{  },

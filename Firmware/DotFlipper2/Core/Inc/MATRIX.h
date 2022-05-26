@@ -23,9 +23,8 @@ typedef struct Matrix{
 }Matrix;
 
 typedef struct Pin{
-	uint8_t 			chainIndex;
-	RegisterAdresses 	hbControlRegisterIndex: 8; //1-3
-	ControlData 		hbControlDataIndex: 8; //1-12
+	uint8_t chainIndex: 3;
+	uint8_t	hBridgeIndex: 4;
 }Pin;
 
 typedef struct Pixel{
