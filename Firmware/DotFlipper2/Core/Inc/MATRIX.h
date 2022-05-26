@@ -14,6 +14,28 @@ extern "C" {
 
 #include "TLE94112ES.h"
 
+typedef enum hBridge{
+	HB1 = 1,
+	HB2 = 2,
+	HB3 = 3,
+	HB4 = 4,
+	HB5 = 5,
+	HB6 = 6,
+	HB7 = 7,
+	HB8 = 8,
+	HB9 = 9,
+	HB10 = 10,
+	HB11 = 11,
+	HB12 = 12,
+}hBridge;
+
+typedef enum daisyChain{
+	DC0 = 0,
+	DC1 = 1,
+	DC2 = 2,
+	DC3 = 3,
+	DC4 = 4
+}daisyChain;
 
 typedef struct Matrix{
 	uint8_t 	width;
@@ -23,8 +45,8 @@ typedef struct Matrix{
 }Matrix;
 
 typedef struct Pin{
-	uint8_t chainIndex: 3;
-	uint8_t	hBridgeIndex: 4;
+	daisyChain	chainIndex: 3;
+	hBridge		hBridgeIndex: 4;
 }Pin;
 
 typedef struct Pixel{
@@ -32,6 +54,7 @@ typedef struct Pixel{
 	Pin rowLow;
 	Pin column;
 }Pixel;
+
 
 
 
