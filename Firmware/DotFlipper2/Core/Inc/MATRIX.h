@@ -30,11 +30,11 @@ typedef enum hBridge{
 }hBridge;
 
 typedef enum daisyChain{
-	DC0 = 0,
-	DC1 = 1,
-	DC2 = 2,
-	DC3 = 3,
-	DC4 = 4
+	C0 = 0,
+	C1 = 1,
+	C2 = 2,
+	R0 = 3,
+	R1 = 4
 }daisyChain;
 
 typedef struct Matrix{
