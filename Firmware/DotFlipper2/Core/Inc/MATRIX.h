@@ -49,12 +49,6 @@ typedef struct Pin{
 	hBridge		hBridgeIndex: 4;
 }Pin;
 
-typedef struct Pixel{
-	Pin rowHigh;
-	Pin rowLow;
-	Pin column;
-}Pixel;
-
 typedef struct Row{
 	Pin high;
 	Pin low;
