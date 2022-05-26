@@ -7,6 +7,7 @@ This basic Library contains a Header File, which defines all the necessary regis
 consiting of a register adress, the data and a read/write/clear bit.
 The .c File contains the function `TLE94112ES_ConstructTXBuffer`, which accepts an array of Messages to construct the correct byte order in the TXbuffer for daisy chain operation of arbitrary length 
 
+<details><summary>Basic Controller Structure</summary>
 
 
 ```
@@ -41,6 +42,8 @@ The .c File contains the function `TLE94112ES_ConstructTXBuffer`, which accepts 
                          └─────┘
 
 ```
+</details>
+<details><summary>Matrix Pinout</summary>
 
 | BL9326 |        |  | NC | C29 | C28 | C27 | C26 | C25 | C24 |     | C22 | C21 | C20 | C19 | C18 | C17 | C16 |     | C14 | C13 | C12 | C11 | C10 | C9 | C8 |    | C6 | C5 | C4 | C3 | C2 | C1 | C0 |  |        |        |
 | ------ | ------ | - | -- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | - | ------ | ------ |
@@ -62,3 +65,4 @@ The .c File contains the function `TLE94112ES_ConstructTXBuffer`, which accepts 
 | (L12H) | (L12L) |  |    |     |     |     |     |     |     | C23 |     |     |     |     |     |     |     | C15 |     |     |     |     |     |    |    | C7 |    |    |    |    |    |    |    |  | (L12H) | (L12L) |
 |        |        |  | NC | C29 | C28 | C27 | C26 | C25 | C24 |     | C22 | C21 | C20 | C19 | C18 | C17 | C16 |     | C14 | C13 | C12 | C11 | C10 | C9 | C8 |    | C6 | C5 | C4 | C3 | C2 | C1 | C0 |  |        |        |
 |        |        |  | NC | C29 | C28 | C27 | C26 | C25 | C24 |     | C22 | C21 | C20 | C19 | C18 | C17 | C16 |     | C14 | C13 | C12 | C11 | C10 | C9 | C8 |    | C6 | C5 | C4 | C3 | C2 | C1 | C0 |  |        |        |
+</details>
