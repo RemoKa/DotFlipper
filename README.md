@@ -43,7 +43,7 @@ The .c File contains the function `TLE94112ES_ConstructTXBuffer`, which accepts 
 
 ```
 </details>
-<details><summary>Matrix Pinout</summary>
+<details><summary>BL9326 Matrix Pinout</summary>
 
 | BL9326 |        |  | NC | C29 | C28 | C27 | C26 | C25 | C24 |     | C22 | C21 | C20 | C19 | C18 | C17 | C16 |     | C14 | C13 | C12 | C11 | C10 | C9 | C8 |    | C6 | C5 | C4 | C3 | C2 | C1 | C0 |  |        |        |
 | ------ | ------ | - | -- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | - | ------ | ------ |
