@@ -70,7 +70,7 @@ static const volatile Message emptyMessage = {
 
 };
 
-void Matrix_sendMessages(Matrix* matrix);
+void setPixel(uint8_t x, uint8_t y, uint8_t state, uint8_t *TXBuf, uint8_t *RXBuf, uint8_t daisyChainLength, SPI_HandleTypeDef hspi);
 
 void clearMessages(Message *messages, uint8_t lenght);
 
