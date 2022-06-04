@@ -12,7 +12,10 @@
 extern "C" {
 #endif
 
+#include "MATRIX_PIXEL_MAP.h"
 #include "TLE94112ES.h"
+
+#define PULSE_LENGHT 500
 
 typedef enum hBridge{
 	HB1 = 1,
@@ -58,12 +61,20 @@ typedef struct Column{
 	Pin pin;
 }Column;
 
+static const volatile Message emptyMessage = {
+		0x00,
+		0x00,
+		READ,
+		0x00,
+		0x00
 
-
-
-//map coordinates to PixelInfos
+};
 
 void Matrix_sendMessages(Matrix* matrix);
+
+void clearMessages(Message *messages, uint8_t lenght);
+
+void setPin(Message* m, Pin p, int8_t state);
 
 #ifdef __cplusplus
 }
