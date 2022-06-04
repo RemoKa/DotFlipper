@@ -14,6 +14,7 @@ extern "C" {
 
 #include "MATRIX.h"
 
+
 static const volatile Row RowMap[12] = {
 		{{R1,1 },{R1,5 }},	//0
 		{{R1,7 },{R1,9 }},	//1

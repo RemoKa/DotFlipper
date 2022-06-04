@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-#include "MATRIX_PIXEL_MAP.h"
+//#include "MATRIX_PIXEL_MAP.h"
 #include "TLE94112ES.h"
 
 #define PULSE_LENGHT 500
