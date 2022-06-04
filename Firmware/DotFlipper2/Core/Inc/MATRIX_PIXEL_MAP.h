@@ -2,7 +2,7 @@
  * MATRIX_PIXEL_MAP.h
  *
  *  Created on: 22.05.2022
- *      Author: Remo
+ *      Author: Remo Kagerer
  */
 
 #ifndef INC_MATRIX_PIXEL_MAP_H_
