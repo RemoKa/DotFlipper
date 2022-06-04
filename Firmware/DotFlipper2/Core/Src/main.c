@@ -49,6 +49,7 @@
 
 /* USER CODE END PM */
 
+
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
@@ -116,8 +117,6 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
-  	  volatile int v = ColumnMap[1].pin.chainIndex;
-  	  volatile int w = RowMap[1].high.chainIndex;
   /* USER CODE END 2 */
 
   /* Infinite loop */
