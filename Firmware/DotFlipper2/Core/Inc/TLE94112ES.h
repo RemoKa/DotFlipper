@@ -14,6 +14,7 @@ extern "C" {
 
 #include "main.h"
 
+
 typedef enum RegisterAdresses
 {
 	//Control Registers
@@ -39,6 +40,23 @@ typedef enum RegisterAdresses
 	OP_ERROR_5_STAT		= 0x47,
 	OP_ERROR_6_STAT		= 0x27
 }RegisterAdresses;
+
+static const volatile uint8_t HbActCtrlLookup[12] = {
+		HB_ACT_1_CTRL,
+		HB_ACT_1_CTRL,
+		HB_ACT_1_CTRL,
+		HB_ACT_1_CTRL,
+
+		HB_ACT_2_CTRL,
+		HB_ACT_2_CTRL,
+		HB_ACT_2_CTRL,
+		HB_ACT_2_CTRL,
+
+		HB_ACT_3_CTRL,
+		HB_ACT_3_CTRL,
+		HB_ACT_3_CTRL,
+};
+
 
 typedef enum ControlData
 {
@@ -159,6 +177,21 @@ typedef enum ControlData
 	//reserved 			= 0b01000000,
 	//reserved 			= 0b10000000,
 }ControlData;
+
+static const volatile uint8_t HbEnLookup[12][2] = {
+		{HB1_LS_EN, HB1_HS_EN},
+		{HB2_LS_EN, HB2_HS_EN},
+		{HB3_LS_EN, HB3_HS_EN},
+		{HB4_LS_EN, HB4_HS_EN},
+		{HB5_LS_EN, HB5_HS_EN},
+		{HB6_LS_EN, HB6_HS_EN},
+		{HB7_LS_EN, HB7_HS_EN},
+		{HB8_LS_EN, HB8_HS_EN},
+		{HB9_LS_EN, HB9_HS_EN},
+		{HB10_LS_EN, HB10_HS_EN},
+		{HB11_LS_EN, HB11_HS_EN},
+		{HB12_LS_EN, HB12_HS_EN},
+};
 
 typedef enum StatusData
 {
