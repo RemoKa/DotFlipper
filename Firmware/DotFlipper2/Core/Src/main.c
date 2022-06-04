@@ -23,10 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "TLE94112ES.h"
 #include "MATRIX.h"
-#include "DISPLAY.h"
-#include "MATRIX_PIXEL_MAP.h"
 //#include "DISPLAY.h"
 
 /* USER CODE END Includes */
@@ -54,12 +51,8 @@
 
 /* USER CODE BEGIN PV */
 
-Display display;
-Matrix 		matrix;
-uint32_t 	framebuf1[BUFFERLENGHT];
-uint32_t 	framebuf2[BUFFERLENGHT];
-uint32_t 	difbuf[BUFFERLENGHT];
-Message		messages[DAISYCHAINLENGHT];
+uint8_t TXBuf[DAISYCHAINLENGHT * 2];
+uint8_t RXBuf[DAISYCHAINLENGHT * 2];
 
 /* USER CODE END PV */
 
@@ -82,17 +75,9 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-	display.width = WIDTH;
-	display.height = HEIGHT;
-	display.Matrix = &matrix;
-	display.Frontbuffer = framebuf1;
-	display.Backbuffer = framebuf2;
-	display.Differencebuffer = difbuf;
 
-	display.Matrix->width = WIDTH;
-	display.Matrix->height = HEIGHT;
-	display.Matrix->DaisyChainLength = DAISYCHAINLENGHT;
-	display.Matrix->MessageBuffer = messages;
+	  HAL_GPIO_WritePin(HB_EN_GPIO_Port, HB_EN_Pin, 1);
+	  HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
 
 
   /* USER CODE END 1 */
@@ -117,12 +102,22 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+	  setPixel(0, 0, 1, TXBuf, RXBuf, DAISYCHAINLENGHT, hspi2);
+
+	  HAL_Delay(1000);
+
+	  setPixel(0, 0, 0, TXBuf, RXBuf, DAISYCHAINLENGHT, hspi2);
+
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
