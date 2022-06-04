@@ -7,6 +7,7 @@
 
 
 #include "MATRIX.h"
+#include "MATRIX_PIXEL_MAP.h"
 
 void setPixel(uint8_t x, uint8_t y, uint8_t state, uint8_t *TXBuf, uint8_t *RXBuf, uint8_t daisyChainLength, SPI_HandleTypeDef hspi){
 
@@ -14,23 +15,21 @@ void setPixel(uint8_t x, uint8_t y, uint8_t state, uint8_t *TXBuf, uint8_t *RXBu
 	clearMessages(messages, daisyChainLength);
 
 	//lookup row and column info of pixel
-	Column *c = &ColumnMap[x];
-	Row *r = &RowMap[y];
+	const Column *c = &ColumnMap[x];
+	const Row *r = &RowMap[y];
 
 	//cache messages in message index that concern this pixel
-	Message* mRH = &messages[r.high.chainIndex];
-	Message* mRL = &messages[r.low.chainIndex];
-	Message* mC = &messages[c.pin.chainIndex];
+	Message* mRH = &messages[r->high.chainIndex];
+	Message* mRL = &messages[r->low.chainIndex];
+	Message* mC = &messages[c->pin.chainIndex];
 
 	if(state){
-
-
 
 		clearMessages(messages, daisyChainLength);
 		//set row high Pin to high
 
-		setPin(mRH, r.high, 1);
-		setPin(mC, c.pin, 0);
+		setPin(mRH, r->high, 1);
+		setPin(mC, c->pin, 0);
 
 		TLE94112ES_ConstructTXBuffer(TXBuf, daisyChainLength, messages);
 
@@ -38,7 +37,7 @@ void setPixel(uint8_t x, uint8_t y, uint8_t state, uint8_t *TXBuf, uint8_t *RXBu
 		HAL_SPI_TransmitReceive(&hspi, TXBuf, RXBuf, daisyChainLength * 2, HAL_MAX_DELAY);
 		HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
 	  	TLE94112ES_DeconstructRXBuffer(RXBuf, daisyChainLength, messages);
-		//send buffer
+
 
 		HAL_Delay(PULSE_LENGHT);
 
@@ -46,8 +45,8 @@ void setPixel(uint8_t x, uint8_t y, uint8_t state, uint8_t *TXBuf, uint8_t *RXBu
 
 		//set Pins back to HighZ
 
-		setPin(mRH, r.high, -1);
-		setPin(mC, c.pin, -1);
+		setPin(mRH, r->high, -1);
+		setPin(mC, c->pin, -1);
 
 		TLE94112ES_ConstructTXBuffer(TXBuf, daisyChainLength, messages);
 
@@ -55,9 +54,39 @@ void setPixel(uint8_t x, uint8_t y, uint8_t state, uint8_t *TXBuf, uint8_t *RXBu
 		HAL_SPI_TransmitReceive(&hspi, TXBuf, RXBuf, daisyChainLength * 2, HAL_MAX_DELAY);
 		HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
 	  	TLE94112ES_DeconstructRXBuffer(RXBuf, daisyChainLength, messages);
-		//send buffer
+
 
 	}else{
+		clearMessages(messages, daisyChainLength);
+		//set row low Pin to low
+
+		setPin(mRL, r->low, 0);
+		setPin(mC, c->pin, 1);
+
+		TLE94112ES_ConstructTXBuffer(TXBuf, daisyChainLength, messages);
+
+		HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+		HAL_SPI_TransmitReceive(&hspi, TXBuf, RXBuf, daisyChainLength * 2, HAL_MAX_DELAY);
+		HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  	TLE94112ES_DeconstructRXBuffer(RXBuf, daisyChainLength, messages);
+
+
+		HAL_Delay(PULSE_LENGHT);
+
+		clearMessages(messages, daisyChainLength);
+
+		//set Pins back to HighZ
+
+		setPin(mRL, r->low, -1);
+		setPin(mC, c->pin, -1);
+
+		TLE94112ES_ConstructTXBuffer(TXBuf, daisyChainLength, messages);
+
+		HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 0);
+		HAL_SPI_TransmitReceive(&hspi, TXBuf, RXBuf, daisyChainLength * 2, HAL_MAX_DELAY);
+		HAL_GPIO_WritePin(SPI2_CS_GPIO_Port, SPI2_CS_Pin, 1);
+	  	TLE94112ES_DeconstructRXBuffer(RXBuf, daisyChainLength, messages);
+
 
 	}
 
