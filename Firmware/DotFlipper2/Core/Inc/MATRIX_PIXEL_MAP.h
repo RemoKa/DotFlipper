@@ -15,7 +15,7 @@ extern "C" {
 #include "MATRIX.h"
 
 
-static const volatile Row RowMap[12] = {
+static const Row RowMap[12] = {
 		{{R1,1 },{R1,5 }},	//0
 		{{R1,7 },{R1,9 }},	//1
 		{{R1,6 },{R1,4 }},	//2
@@ -30,7 +30,7 @@ static const volatile Row RowMap[12] = {
 		{{R0,9 },{R0,7 }},	//10
 		{{R0,4 },{R0,6 }}	//11
 };
-static const volatile Column ColumnMap[30] = {
+static const Column ColumnMap[30] = {
 		{{C0,4}},		//0
 		{{C0,6}},		//1
 		{{C0,9}},		//2
